@@ -74,7 +74,7 @@ Each lesson in the playlist has it's own code in it's own branch. To see the cod
 
 ```
 first branch is master
-git clone --branch master https://github.com/sramos30/flutter-firebase.git repository
+git clone --branch master https://github.com/sramos30/flutter-firebase.git master
     
 List all your branches:
 $ git branch -a    
