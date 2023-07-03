@@ -59,7 +59,7 @@ fi
 
 if [ -f ./switched ];
 then
-    BRANCH_NAME=$(<./switched ) 2> /dev/null
+    BRANCH_NAME=$(< `./switched` ) 2> /dev/null
 fi
 
 if [ "$1" == "push" ];

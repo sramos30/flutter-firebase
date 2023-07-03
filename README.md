@@ -41,9 +41,6 @@ All course files for the Flutter &amp; Firebase tutorial playlist on The Net Nin
 
 ## how to use this repo
 
-    # first branch is master
-    git clone https://github.com/sramos30/flutter-firebase.git master
-    
 Each lesson in the playlist has it's own code in it's own branch. To see the code for lesson 7, for example, you would select the lesson-7 branch.
 
   master
@@ -74,3 +71,21 @@ Each lesson in the playlist has it's own code in it's own branch. To see the cod
   lesson-25
   lesson-26
   lesson-27
+
+```
+first branch is master
+git clone --branch master https://github.com/sramos30/flutter-firebase.git repository
+    
+List all your branches:
+$ git branch -a    
+
+Checkout the branch you want to use.
+$ git checkout <feature_branch>
+
+Confirm you are now working on that branch:
+$ git branch 
+
+Clone the repository and fetch only a single branch.
+git clone --branch <branchname> <remote-repo-url>
+
+```
