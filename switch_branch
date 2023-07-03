@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
 usage() {
     #if [ "$*" ]; then
@@ -26,7 +26,8 @@ switchBranch() {
     #git checkout ${BRANCH_NAME}
     git switch --discard-changes "${BRANCH_NAME}"
     git fetch
-    echo ${BRANCH_NAME} > switched
+    #echo ${BRANCH_NAME} > switched
+    git branch > switched
 }
 
 createBranch() {
@@ -49,17 +50,13 @@ pushBranch() {
     git push --set-upstream origin ${BRANCH_NAME}
 }
 
+GIT_REPOSITORY="https://github.com/sramos30/flutter-firebase"
 BRANCH_NAME=""
 ACTION=""
 
 if [ -z "$1" ];
 then
     usage
-fi
-
-if [ -f ./switched ];
-then
-    BRANCH_NAME=$(< `./switched` ) 2> /dev/null
 fi
 
 if [ "$1" == "push" ];
@@ -86,22 +83,35 @@ then
     usage
 fi
 
+echo "Action $ACTION on BRANCH $BRANCH_NAME"
 
-if [ "${ACTION}" == "copy" ];
+if [ ! -d './repository' ];
 then
-    copyBranch "${BRANCH_NAME}" $2
-else if [ "${ACTION}" == "switch" ];
-  then
-    switchBranch "${BRANCH_NAME}"
-  else if [ "${ACTION}" == "push" ];
-    then
-        pushBranch "${BRANCH_NAME}" "$2"
-    else if [ "${ACTION}" == "create" ];
-        then
-            createBranch "${BRANCH_NAME}"
-        else
-            usage
-        fi
-    fi
-  fi
+    git clone -b $BRANCH_NAME $GIT_REPOSITORY "$PWD/repository"
+    git config --global --add safe.directory "$PWD/repository"
+    cd "$PWD/repository"
+    git branch -a > "../branches"
+    git branch > "../switched"
+    cd ..
 fi
+
+
+
+#if [ "${ACTION}" == "copy" ];
+#then
+#    copyBranch "${BRANCH_NAME}" $2
+#else if [ "${ACTION}" == "switch" ];
+#  then
+#    switchBranch "${BRANCH_NAME}"
+#  else if [ "${ACTION}" == "push" ];
+#    then
+#        pushBranch "${BRANCH_NAME}" "$2"
+#    else if [ "${ACTION}" == "create" ];
+#        then
+#            createBranch "${BRANCH_NAME}"
+#        else
+#            usage
+#        fi
+#    fi
+#  fi
+#fi
