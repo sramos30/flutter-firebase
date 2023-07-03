@@ -2,6 +2,15 @@
 
 GIT_REPOSITORY="https://github.com/sramos30/flutter-firebase"
 
+if [ ! -d './repository' ];
+then
+    git clone $GIT_REPOSITORY repository
+    git config --global --add safe.directory "$PWD/repository"
+    cd repository
+    git branch | cut -d' ' -f 2 > "../switched"
+    cd ..
+fi
+
 usage() {
     #if [ "$*" ]; then
     #    echo "$*"
@@ -11,14 +20,6 @@ usage() {
     echo "       $(basename $0) push [comments]      "
     echo "       $(basename $0) copy [folder]        "
     echo "                                           "
-    if [ ! -d './repository' ];
-    then
-        git clone $GIT_REPOSITORY repository
-        git config --global --add safe.directory "$PWD/repository"
-        cd repository
-        git branch | cut -d' ' -f 2 > "../switched"
-        cd ..
-    fi
     exit 2
 }
 
