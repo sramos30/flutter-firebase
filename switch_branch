@@ -87,14 +87,13 @@ echo "Action $ACTION on BRANCH $BRANCH_NAME"
 
 if [ ! -d './repository' ];
 then
-    git clone -b $BRANCH_NAME $GIT_REPOSITORY "$PWD/repository"
+    git clone -b $BRANCH_NAME $GIT_REPOSITORY repository
     git config --global --add safe.directory "$PWD/repository"
-    cd "$PWD/repository"
+    cd repository
     git branch -a > "../branches"
     git branch > "../switched"
     cd ..
 fi
-
 
 
 #if [ "${ACTION}" == "copy" ];
